@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}{% endblock title %}</title>
+        <meta name="description"
+            content="{% block description %} {% endblock description%}">
+        <meta name="keywords"
+            content="{% block keywords %} {% endblock keywords %}">
+        <link href="{% static 'pirate/css/normalize.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'pirate/css/tpb.css' %}" rel="stylesheet" type="text/css">
+        {% block extra_head %}
+        {% endblock %}
+    </head>
+    <body {% block bodyattr %} {% endblock bodyattr %}>
+       {% block content %}
+       {% endblock content %}
+       <script>
+        function getSearch(){
+        var searchValue = encodeURI(document.getElementById("search").value);
+        if (searchValue){
+            document.getElementsByTagName("form")[0].action = "{% url 'app_pirate:search' %}"+searchValue;
+        }
+    }
+    </script>
+    </body>
+    
+</html>

@@ -1,0 +1,142 @@
+{% extends 'pirate/base.html' %}
+{% load static %}
+{% block title %}
+    The Pirate Bay - The galaxy's most resilient bittorrent site
+{% endblock title %}
+{% block bodyattr %}
+    id="browse"
+{% endblock bodyattr %}
+{% block content %}
+    <main>
+        <h1><label id="tlt"></label></h1>
+        <div class="browse">
+            <section class="col-center">
+                <!-- <input type="text" id="flist" onkeyup="filter_list()" placeholder="Filter names.." size="40"> -->
+                <ol id="torrents" class="view-single">
+                    <li class="list-header">
+                        <span class="list-item list-header item-type"><label onclick="sortlist(1);"
+                                title="Order by Category">Category</label></span>
+                        <span class="list-item list-header item-name"><label onclick="sortlist(2);"
+                                title="Order by Name">Name</label></span>
+                        <span class="list-item list-header item-uploaded"><label onclick="sortlist(3);"
+                                title="Order by Date Uploaded">Uploaded</label></span>
+                        <span class="list-item list-header item-icons">&nbsp;</span>
+                        <span class="list-item list-header item-size"><label onclick="sortlist(5);"
+                                title="Order by Size">Size</label></span>
+                        <span class="list-item list-header item-seed"><label onclick="sortlist(6);"
+                                title="Order by Seeders">Seeders</label></span>
+                        <span class="list-item list-header item-leech"><label onclick="sortlist(7);"
+                                title="Order by Leechers">Leechers</label></span>
+                        <span class="list-item list-header item-user"><label onclick="sortlist(8);"
+                                title="Order by ULed by">ULed by</label></span>
+                    </li>
+                    {% if results %}
+                        {% for result in results %}
+                            <li class="list-entry" id="st">
+                                <span class="list-item item-type">{{result.category}}</span>
+                                <span class="list-item item-name item-title">
+                                    <a href="/description.php?id=7447589">{{result.name}}</a>
+                                </span>
+                                <span class="list-item item-uploaded">{{result.uploaded_on}}</span>
+                                <span class="item-icons">
+                                    <a href="{{result.magnet}}">
+                                        <img src="https://torrindex.net/images/icon-magnet.gif"></a>&nbsp;
+                                        {% if result.is_Trusted %}
+                                        <img src="{% static 'pirate/images/trusted.png' %}" alt="Trusted">
+                                        {% else %}
+                                        <img src="{% static 'pirate/images/nottrusted.gif' %}" alt="Not Trusted">
+                                        {% endif %}
+                                </span>
+                                <span class="list-item item-size">{{result.size}}</span>
+                                <span class="list-item item-seed">{{result.seeders}}</span>
+                                <span class="list-item item-leech">{{result.leechers}}</span>
+                                <span class="list-item item-user">
+                                    <a href="/search.php?q=user:YIFY">{{result.added_by}}</a>
+                                </span>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+
+                </ol>
+            </section>
+        </div>
+    </main>
+    <header class="row">
+        <section class="col-left" id="logo">
+            <a href="{% url 'app_pirate:home' %}">
+                <img src="{% static 'pirate/images/tpb.jpg' %}" alt="The Pirate Bay">
+            </a>
+        </section>
+        <section class="col-center">
+            <nav>
+                <a href="{% url 'app_pirate:home' %}" title="Search Torrents"><strong>Search&nbsp;Torrents</strong></a> |
+                <a href="/browse.php" title="Browse Torrents">Browse&nbsp;Torrents</a> |
+                <a href="/search.html?q=top100:recent" title="Recent Torrent">Recent&nbsp;Torrents</a> |
+                <a href="/top.php" title="Top 100">Top&nbsp;100</a>
+            </nav>
+            <form onsubmit="getSearch()">
+                <input type="search" title="Pirate Search" placeholder="Search here..." autocomplete="off" id="search">
+                <input value="Pirate Search" type="submit">
+                <select name="cat" id="cat">
+                    <option value="0">All</option>
+                    <optgroup label="Audio">
+                        <option value="101">Music</option>
+                        <option value="102">Audio books</option>
+                        <option value="103">Sound clips</option>
+                        <option value="104">FLAC</option>
+                        <option value="199">Other</option>
+                    </optgroup>
+                    <optgroup label="Video">
+                        <option value="201">Movies</option>
+                        <option value="202">Movies DVDR</option>
+                        <option value="203">Music videos</option>
+                        <option value="204">Movie clips</option>
+                        <option value="205">TV shows</option>
+                        <option value="206">Handheld</option>
+                        <option value="207">HD - Movies</option>
+                        <option value="208">HD - TV shows</option>
+                        <option value="209">3D</option>
+                        <option value="299">Other</option>
+                    </optgroup>
+                    <optgroup label="Applications">
+                        <option value="301">Windows</option>
+                        <option value="302">Mac</option>
+                        <option value="303">UNIX</option>
+                        <option value="304">Handheld</option>
+                        <option value="305">IOS (iPad/iPhone)</option>
+                        <option value="306">Android</option>
+                        <option value="399">Other OS</option>
+                    </optgroup>
+                    <optgroup label="Games">
+                        <option value="401">PC</option>
+                        <option value="402">Mac</option>
+                        <option value="403">PSx</option>
+                        <option value="404">XBOX360</option>
+                        <option value="405">Wii</option>
+                        <option value="406">Handheld</option>
+                        <option value="407">IOS (iPad/iPhone)</option>
+                        <option value="408">Android</option>
+                        <option value="499">Other</option>
+                    </optgroup>
+                    <optgroup label="Porn">
+                        <option value="501">Movies</option>
+                        <option value="502">Movies DVDR</option>
+                        <option value="503">Pictures</option>
+                        <option value="504">Games</option>
+                        <option value="505">HD - Movies</option>
+                        <option value="506">Movie clips</option>
+                        <option value="599">Other</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option value="601">E-books</option>
+                        <option value="602">Comics</option>
+                        <option value="603">Pictures</option>
+                        <option value="604">Covers</option>
+                        <option value="605">Physibles</option>
+                        <option value="699">Other</option>
+                    </optgroup>
+                </select>
+            </form>
+        </section>
+    </header>
+{% endblock content %}
