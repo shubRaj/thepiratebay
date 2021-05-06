@@ -47,7 +47,7 @@
                                         <img src="{% static 'pirate/images/nottrusted.gif' %}" alt="Not Trusted">
                                         {% endif %}
                                 </span>
-                                <span class="list-item item-size">{{result.size}}</span>
+                                <span class="list-item item-size">{{result.size|filesizeformat}}</span>
                                 <span class="list-item item-seed">{{result.seeders}}</span>
                                 <span class="list-item item-leech">{{result.leechers}}</span>
                                 <span class="list-item item-user">
