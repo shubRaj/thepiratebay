@@ -8,7 +8,7 @@ class Home(TemplateView):
 class Search(View):
     template_name = "pirate/search.html"
     async def get(self,request,*args,**kwargs):
-        if kwargs.get("query"):
+        if kwargs.get("query") and len(kwargs.get("query"))>3:
             data = await torrentAPI(kwargs)
         else:
             data = None

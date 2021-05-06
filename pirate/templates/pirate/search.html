@@ -35,12 +35,12 @@
                             <li class="list-entry" id="st">
                                 <span class="list-item item-type">{{result.category}}</span>
                                 <span class="list-item item-name item-title">
-                                    <a href="{% url 'app_pirate:description' result.id %}">{{result.name}}</a>
+                                    <a href="">{{result.name}}</a>
                                 </span>
                                 <span class="list-item item-uploaded">{{result.uploaded_on}}</span>
                                 <span class="item-icons">
                                     <a href="{{result.magnet}}">
-                                        <img src="https://torrindex.net/images/icon-magnet.gif"></a>&nbsp;
+                                        <img src="{% static 'pirate/images/icon-magnet.gif' %}"></a>&nbsp;
                                         {% if result.is_Trusted %}
                                         <img src="{% static 'pirate/images/trusted.png' %}" alt="Trusted">
                                         {% else %}

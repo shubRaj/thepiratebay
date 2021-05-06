@@ -1,4 +1,5 @@
 {% extends 'pirate/base.html' %}
+{% load static %}
 {% block title %}{{block.super}} {% endblock title %}
 {% block bodyattr %}
     id="browse"
@@ -51,9 +52,7 @@
                     </dl>
                 </div>
                 <div class="links">
-                    <label id="d">
-                        <a href="{{result.magnet}}" target="_NEW" style="color:#009" class="hyper-link">Download Anonymously</a>
-                    </label>
+                    <label id="d"><a href="{{result.magnet}}"><img src="{% static 'pirate/images/icon-magnet.gif' %}"> Get This Torrent</a></label>
                 </div>
                 <div id="description_text" class="text-box"><label id="descr">{{result.description}}</label></div>
                 <div class="links">
