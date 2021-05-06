@@ -1,0 +1,71 @@
+{% extends 'pirate/base.html' %}
+{% block title %}{{block.super}} {% endblock title %}
+{% block bodyattr %}
+    id="browse"
+{% endblock bodyattr %}
+{% block content %}
+
+{% include 'pirate/header.html' %}
+<main>
+    <h1>Details for: <label id="tlt">{{result.name}}</label></h1>
+    <div class="browse">
+        <section class="col-center">
+            <div id="description_container">
+                <h2><label id="name"></label></h2>
+                <div id="metadata">
+                    <dl id="meta-left" class="col-meta">
+                        <div>
+                            <dt class="dt-sm">Type:</dt>
+                            <dd><label id="cat">{{result.category}}</label></dd>
+                        </div>
+                        <div>
+                            <dt class="dt-sm">Files:</dt>
+                            <dd><label id="nfiles">{{result.files}}</label></dd>
+                        </div>
+                        <div>
+                            <dt class="dt-sm">Size:</dt>
+                            <dd><label id="size">{{result.size|filesizeformat}}</label></dd>
+                        </div>
+                        <br />
+                        <div>
+                            <dt class="dt-md">Uploaded On:</dt>
+                            <dd><label id="uld">{{result.uploaded_on}}</label></dd>
+                        </div>
+                        <div>
+                            <dt class="dt-md">Added By:</dt>
+                            <dd><label id="user">{{result.added_by}}</label></dd>
+                        </div>
+                        <br />
+                        <div>
+                            <dt class="dt-md">Seeders:</dt>
+                            <dd><label id="s">{{result.seeders}}</label></dd>
+                        </div>
+                        <div>
+                            <dt class="dt-md">Leechers:</dt>
+                            <dd><label id="l">{{result.leechers}}</label></dd>
+                        </div>
+                        <div>
+                            <dt class="dt-md">Info Hash:</dt>
+                            <dd style="overflow-wrap: break-word; overflow: hidden;">{{result.hash}}<label id="ih"></label></dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="links">
+                    <label id="d">
+                        <a href="{{result.magnet}}" target="_NEW" style="color:#009" class="hyper-link">Download Anonymously</a>
+                    </label>
+                </div>
+                <div id="description_text" class="text-box"><label id="descr">{{result.description}}</label></div>
+                <div class="links">
+                    <label id="d2"></label>
+                </div>
+                <div id="filelist" class="text-box">
+                    <ol>
+                        <script>if (typeof make_filelist !== "undefined") make_filelist();</script>
+                    </ol>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock content %}
