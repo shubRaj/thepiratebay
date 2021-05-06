@@ -53,16 +53,26 @@
                 </div>
                 <div class="links">
                     <label id="d"><a href="{{result.magnet}}"><img src="{% static 'pirate/images/icon-magnet.gif' %}"> Get This Torrent</a></label>
+                    {% if result.watchable %}
+                    <a href="https://watch.shubraj.com/?magnet={{result.magnet}}" target="_blank" style="color:#009" class="hyper-link">Watch Online</a>
+                    {% endif %}
                 </div>
                 <div id="description_text" class="text-box"><label id="descr">{{result.description}}</label></div>
                 <div class="links">
                     <label id="d2"></label>
                 </div>
+                {% if result.filesName %}
                 <div id="filelist" class="text-box">
                     <ol>
-                        <script>if (typeof make_filelist !== "undefined") make_filelist();</script>
+                        {% for file in result.filesName %}
+                        <li>
+                            <span class="file-name">{{file.name.0}}</span>
+                            <span class="file-size">{{file.size.0|filesizeformat}}</span>
+                        </li>    
+                        {% endfor %}
                     </ol>
                 </div>
+                {% endif %}
             </div>
         </section>
     </div>

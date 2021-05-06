@@ -35,7 +35,7 @@
                             <li class="list-entry" id="st">
                                 <span class="list-item item-type">{{result.category}}</span>
                                 <span class="list-item item-name item-title">
-                                    <a href="">{{result.name}}</a>
+                                    <a href="{% url 'app_pirate:description' result.id %}">{{result.name}}</a>
                                 </span>
                                 <span class="list-item item-uploaded">{{result.uploaded_on}}</span>
                                 <span class="item-icons">

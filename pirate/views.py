@@ -22,6 +22,10 @@ class Description(View):
     template_name = "pirate/description.html"
     async def get(self,request,*args,**kwargs):
         data = await torrentAPI(kwargs)
+        id = data.get("id")
+        if id:
+            data2 = await torrentAPI({"fileid":id})
+            data["filesName"] = data2
         return render(request,self.template_name,{"result":data})
     @classonlymethod
     def as_view(cls,**initkwargs):
