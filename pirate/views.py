@@ -10,15 +10,19 @@ class Search(View):
     async def get(self,request,*args,**kwargs):
         if kwargs.get("query"):
             data = await torrentAPI(kwargs)
-            if data:
-                 for single in data:
-                    if single["size"]>1024:
-                        single["size"] = f"{round(single['size']/1024,2)} GB"
-                    else:
-                        single["size"] = f"{single['size']} MB"
         else:
             data = None
         return render(request,self.template_name,{"results":data})
+    @classonlymethod
+    def as_view(cls,**initkwargs):
+        view = super().as_view(**initkwargs)
+        view._is_coroutine = asyncio.coroutines._is_coroutine
+        return view
+class Description(View):
+    template_name = "pirate/description.html"
+    async def get(self,request,*args,**kwargs):
+        data = await torrentAPI(kwargs)
+        return render(request,self.template_name,{"result":data})
     @classonlymethod
     def as_view(cls,**initkwargs):
         view = super().as_view(**initkwargs)
