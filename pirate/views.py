@@ -18,7 +18,7 @@ class Search(View):
         view = super().as_view(**initkwargs)
         view._is_coroutine = asyncio.coroutines._is_coroutine
         return view
-class Description(View):
+class Description(Search):
     template_name = "pirate/description.html"
     async def get(self,request,*args,**kwargs):
         data = await torrentAPI(kwargs)
@@ -27,8 +27,3 @@ class Description(View):
             data2 = await torrentAPI({"fileid":id})
             data["filesName"] = data2
         return render(request,self.template_name,{"result":data})
-    @classonlymethod
-    def as_view(cls,**initkwargs):
-        view = super().as_view(**initkwargs)
-        view._is_coroutine = asyncio.coroutines._is_coroutine
-        return view
