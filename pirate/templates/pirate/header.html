@@ -8,9 +8,12 @@
     <section class="col-center">
         <nav>
             <a href="{% url 'app_pirate:home' %}" title="Search Torrents"><strong>Search&nbsp;Torrents</strong></a> |
-            <a href="/browse.php" title="Browse Torrents">Browse&nbsp;Torrents</a> |
-            <a href="/search.html?q=top100:recent" title="Recent Torrent">Recent&nbsp;Torrents</a> |
+            {% comment %}
+            <a href="/browse.php" title="Browse Torrents">Browse&nbsp;Torrents</a> |{% endcomment %}
+            <a href="{% url 'app_pirate:search' 'recent' %}" title="Recent Torrent">Recent&nbsp;Torrents</a> |
+            {% comment %}
             <a href="/top.php" title="Top 100">Top&nbsp;100</a>
+            {% endcomment %}
         </nav>
         <form onsubmit="getSearch()">
             <input type="search" title="Pirate Search" placeholder="Search here..." autocomplete="off" id="search">

@@ -14,20 +14,20 @@
                 <!-- <input type="text" id="flist" onkeyup="filter_list()" placeholder="Filter names.." size="40"> -->
                 <ol id="torrents" class="view-single">
                     <li class="list-header">
-                        <span class="list-item list-header item-type"><label onclick="sortlist(1);"
+                        <span class="list-item list-header item-type"><label
                                 title="Order by Category">Category</label></span>
-                        <span class="list-item list-header item-name"><label onclick="sortlist(2);"
+                        <span class="list-item list-header item-name"><label
                                 title="Order by Name">Name</label></span>
-                        <span class="list-item list-header item-uploaded"><label onclick="sortlist(3);"
+                        <span class="list-item list-header item-uploaded"><label
                                 title="Order by Date Uploaded">Uploaded</label></span>
                         <span class="list-item list-header item-icons">&nbsp;</span>
-                        <span class="list-item list-header item-size"><label onclick="sortlist(5);"
+                        <span class="list-item list-header item-size"><label
                                 title="Order by Size">Size</label></span>
-                        <span class="list-item list-header item-seed"><label onclick="sortlist(6);"
+                        <span class="list-item list-header item-seed"><label
                                 title="Order by Seeders">Seeders</label></span>
-                        <span class="list-item list-header item-leech"><label onclick="sortlist(7);"
+                        <span class="list-item list-header item-leech"><label
                                 title="Order by Leechers">Leechers</label></span>
-                        <span class="list-item list-header item-user"><label onclick="sortlist(8);"
+                        <span class="list-item list-header item-user"><label 
                                 title="Order by ULed by">Uploaded by</label></span>
                     </li>
                     {% if results %}
@@ -51,7 +51,7 @@
                                 <span class="list-item item-seed">{{result.seeders}}</span>
                                 <span class="list-item item-leech">{{result.leechers}}</span>
                                 <span class="list-item item-user">
-                                    <a href="/search.php?q=user:YIFY">{{result.added_by}}</a>
+                                    <a href="{% url 'app_pirate:search' 'user:'|add:result.added_by %}">{{result.added_by}}</a>
                                 </span>
                             </li>
                         {% endfor %}

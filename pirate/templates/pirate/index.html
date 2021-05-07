@@ -18,9 +18,12 @@
             <section><a href="#" style="border: 0;"><img src="{% static 'pirate/images/tpb_poster.jpg' %}"></a></section>
             <section>
                 <strong>Search Torrents</strong> |
-                <a href="browse.html" title="Browse Torrents">Browse&nbsp;Torrents</a> |
-                <a href="searcha6be.html?q=top100:recent" title="Recent Torrents">Recent&nbsp;Torrents</a> |
+                {% comment %}
+                <a href="browse.html" title="Browse Torrents">Browse&nbsp;Torrents</a> |{% endcomment %}
+                <a href="{% url 'app_pirate:search' 'recent' %}" title="Recent Torrents">Recent&nbsp;Torrents</a> |
+                {% comment %}
                 <a href="top.html" title="Top 100">Top&nbsp;100</a>
+                {% endcomment %}
             </section>
         </nav>
     </header>
